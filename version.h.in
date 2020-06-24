@@ -1,0 +1,22 @@
+//
+// Created by Hedzr Yeh on 2019-01-28.
+//
+
+#ifndef SM_VERSION_H
+#define SM_VERSION_H
+
+#define xT(str)                str
+
+/*  NB: this file is parsed by automatic tools so don't change its format! */
+#define xMAJOR_VERSION      @xVERSION_MAJOR@
+#define xMINOR_VERSION      @xVERSION_MINOR@
+#define xRELEASE_NUMBER     @xVERSION_MICRO@
+#define xPATCH_NUMBER       @xVERSION_PATCH@
+
+#define xVERSION_STRING     xT("@PROJECT_VERSION@")
+#define xARCHIVE_NAME       xT("@ARCHIVE_NAME@")
+
+#define GIT_BRANCH          xT("@GIT_BRANCH@")
+#define GIT_COMMIT_HASH     xT("@GIT_COMMIT_HASH@")
+
+#endif //SM_VERSION_H

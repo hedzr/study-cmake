@@ -1,0 +1,62 @@
+PROJECT (library-1 C CXX)
+
+LIST(APPEND SC14R_INCS
+        ${PROJECT_SOURCE_DIR}
+        ${PROJECT_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/src
+        ${PROJECT_SOURCE_DIR}/src/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+
+        # Generated files
+        ${CMAKE_BINARY_DIR}/generated
+
+        # Generated includes
+        ${CMAKE_BINARY_DIR}
+        ${CMAKE_BINARY_DIR}/src
+        )
+
+include_directories(${SC14R_INCS})
+include_directories(SYSTEM ${SC14R_INCS_SYS})
+
+
+MESSAGE(STATUS "This is muchs-BINARY dir " ${library-1_BINARY_DIR})
+MESSAGE(STATUS "This is muchs-SOURCE dir " ${library-1_SOURCE_DIR})
+MESSAGE(STATUS "This is muchs-INCLUDE dir " ${CMAKE_CURRENT_SOURCE_DIR}/include)
+MESSAGE(STATUS "This is PROJECT_SOURCE_DIR dir " ${PROJECT_SOURCE_DIR})
+
+debugValue(SC14R_INCS)
+
+
+
+
+# The muchs library ---------------
+
+# SET(header_files ${CMAKE_CURRENT_SOURCE_DIR}/include/muchs/muchs.hh)
+FILE(GLOB_RECURSE header_files ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hh)
+LIST(APPEND source_files library.cc)
+# debugValue(source_files)
+debugValue(header_files)
+
+# library
+add_library(muchs STATIC ${source_files} ${header_files})
+target_include_directories(muchs PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_features(muchs PUBLIC cxx_std_11)
+set_target_properties(muchs
+        PROPERTIES
+        CXX_STANDARD 11
+        CXX_STANDARD_REQUIRED YES
+        CXX_EXTENSIONS NO
+        )
+
+
+
+
+
+# The main program ---------------
+
+# The sources shared between the main program and the tests
+set(PROJECT_SOURCES main.cc)
+
+add_executable(library-1-test-program ${PROJECT_SOURCES})
+target_link_libraries(library-1-test-program PRIVATE muchs)
+
