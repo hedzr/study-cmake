@@ -1,7 +1,0 @@
-PROJECT (hello)
-
-SET(SRC_LIST main.cc)
-
-MESSAGE(STATUS "This is BINARY dir " ${hello_BINARY_DIR})
-MESSAGE(STATUS "This is SOURCE dir " ${hello_SOURCE_DIR})
-ADD_EXECUTABLE(hello ${SRC_LIST})

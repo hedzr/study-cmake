@@ -1,5 +1,8 @@
-cmake_minimum_required(VERSION 3.6)
-project(study-cmake VERSION 0.0.0 LANGUAGES C CXX)
+cmake_minimum_required(VERSION 3.8..3.13)
+
+project(study-cmake VERSION 0.1.0
+        DESCRIPTION "study for cmake"
+        LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -8,36 +11,30 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # macOS builtin cmake: /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules
 # brew cmake:          $(brew --prefix cmake)/share/cmake/Modules
-MESSAGE("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
-SET(CMAKE_SCRIPTS "cmake")
-LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/Modules:${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}")
-MESSAGE("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}") ###
+message("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
+set(CMAKE_SCRIPTS "cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/Modules:${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}")
+message("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}") ###
 
 
-
-INCLUDE(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/add-policies.cmake)
-INCLUDE(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/detect-systems.cmake)
-INCLUDE(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/target-dirs.cmake)
-INCLUDE(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/utils.cmake)
-INCLUDE(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/setup-build-env.cmake)
-
+include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/add-policies.cmake)
+include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/detect-systems.cmake)
+include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/target-dirs.cmake)
+include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/utils.cmake)
+include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/setup-build-env.cmake)
 
 
-SET(xVERSION_MAJOR 0)
-SET(xVERSION_MINOR 3)
-SET(xVERSION_MICRO 0)   # build number
-SET(xVERSION_PATCH 0)   # patch number
-SET(PROJECT_VERSION "${xVERSION_MAJOR}.${xVERSION_MINOR}.${xVERSION_MICRO}")
-SET(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${PROJECT_VERSION})
-SET(xVERSION_IN ${CMAKE_SOURCE_DIR}/version.h.in)
-INCLUDE(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/gen-versions.cmake)
+set(xVERSION_MAJOR 0)
+set(xVERSION_MINOR 3)
+set(xVERSION_MICRO 1)   # build number
+set(xVERSION_PATCH 2)   # patch number
+set(PROJECT_VERSION "${xVERSION_MAJOR}.${xVERSION_MINOR}.${xVERSION_MICRO}")
+set(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${PROJECT_VERSION})
+set(xVERSION_IN ${CMAKE_SOURCE_DIR}/version.h.in)
+include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/gen-versions.cmake)
 
 
-
-INCLUDE(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/info.cmake)
-
-
-
+include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/info.cmake)
 
 
 #add_subdirectory(third-party/catch)

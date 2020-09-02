@@ -38,6 +38,14 @@ indent_style = tab
 indent_size = 4
 indent_style = space
 
+[CMakeLists.txt]
+indent_style = tab
+indent_size = 4
+
 [Makefile]
+indent_style = tab
+indent_size = 4
+
+[*.{Makefile, mak}]
 indent_style = tab
 indent_size = 4

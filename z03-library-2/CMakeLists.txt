@@ -1,6 +1,6 @@
-PROJECT (library-2 C CXX)
+project(library-2 C CXX)
 
-LIST(APPEND SC14R_INCS
+list(APPEND SC14R_INCS
         ${PROJECT_SOURCE_DIR}
         ${PROJECT_SOURCE_DIR}/include
         ${PROJECT_SOURCE_DIR}/src
@@ -19,21 +19,19 @@ include_directories(${SC14R_INCS})
 include_directories(SYSTEM ${SC14R_INCS_SYS})
 
 
-MESSAGE(STATUS "This is mucht-BINARY dir " ${library-2_BINARY_DIR})
-MESSAGE(STATUS "This is mucht-SOURCE dir " ${library-2_SOURCE_DIR})
-MESSAGE(STATUS "This is mucht-INCLUDE dir " ${CMAKE_CURRENT_SOURCE_DIR}/include)
-MESSAGE(STATUS "This is PROJECT_SOURCE_DIR dir " ${PROJECT_SOURCE_DIR})
+message(STATUS "This is mucht-BINARY dir " ${library-2_BINARY_DIR})
+message(STATUS "This is mucht-SOURCE dir " ${library-2_SOURCE_DIR})
+message(STATUS "This is mucht-INCLUDE dir " ${CMAKE_CURRENT_SOURCE_DIR}/include)
+message(STATUS "This is PROJECT_SOURCE_DIR dir " ${PROJECT_SOURCE_DIR})
 
 debugValue(SC14R_INCS)
 
 
-
-
 # The muchs library ---------------
 
-# SET(header_files ${CMAKE_CURRENT_SOURCE_DIR}/include/muchs/muchs.hh)
-FILE(GLOB_RECURSE header_files ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hh)
-LIST(APPEND source_files library.cc)
+# set(header_files ${CMAKE_CURRENT_SOURCE_DIR}/include/muchs/muchs.hh)
+file(GLOB_RECURSE header_files ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hh)
+list(APPEND source_files library.cc)
 # debugValue(source_files)
 debugValue(header_files)
 
@@ -47,9 +45,6 @@ set_target_properties(mucht
         CXX_STANDARD_REQUIRED YES
         CXX_EXTENSIONS NO
         )
-
-
-
 
 
 # The main program ---------------

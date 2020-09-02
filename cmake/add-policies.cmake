@@ -18,3 +18,7 @@ cmake_policy(SET CMP0077 NEW) # ENABLE CMP0077: option() honors normal variables
 IF (POLICY CMP0068)
   cmake_policy(SET CMP0068 NEW)
 ENDIF ()
+
+if(${CMAKE_VERSION} VERSION_LESS 3.12)
+  cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+endif()
