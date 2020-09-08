@@ -1,40 +1,38 @@
 cmake_minimum_required(VERSION 3.8..3.13)
-
-project(study-cmake VERSION 0.1.0
-        DESCRIPTION "study for cmake"
-        LANGUAGES C CXX)
+#mark_as_advanced(CMAKE_BACKWARDS_COMPATIBILITY)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # set(CMAKE_CXX_EXTENSIONS OFF)
 
+# saner control structure syntax
+SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
 # macOS builtin cmake: /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules
+#  ll '/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Find*'
 # brew cmake:          $(brew --prefix cmake)/share/cmake/Modules
 message("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
 set(CMAKE_SCRIPTS "cmake")
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/Modules:${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}")
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/modules;${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS};${CMAKE_MODULE_PATH}")
+#list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/Modules:${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}")
 message("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}") ###
 
 
-include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/add-policies.cmake)
-include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/detect-systems.cmake)
-include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/target-dirs.cmake)
-include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/utils.cmake)
-include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/setup-build-env.cmake)
+project(study-cmake
+        VERSION 0.3.1.2
+        DESCRIPTION "study for cmake"
+        LANGUAGES C CXX)
 
 
-set(xVERSION_MAJOR 0)
-set(xVERSION_MINOR 3)
-set(xVERSION_MICRO 1)   # build number
-set(xVERSION_PATCH 2)   # patch number
-set(PROJECT_VERSION "${xVERSION_MAJOR}.${xVERSION_MINOR}.${xVERSION_MICRO}")
 set(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${PROJECT_VERSION})
 set(xVERSION_IN ${CMAKE_SOURCE_DIR}/version.h.in)
-include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/gen-versions.cmake)
-
-
-include(${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/info.cmake)
+include(gen-versions)
+include(add-policies)     # ${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/
+include(detect-systems)
+include(target-dirs)
+include(utils)
+include(setup-build-env)
+include(info)
 
 
 #add_subdirectory(third-party/catch)

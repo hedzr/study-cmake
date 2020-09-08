@@ -56,8 +56,6 @@ if (MSVC OR MSYS OR MINGW)
 endif ()
 
 
-
-
 if (LINUX)
   message(STATUS ">>> Linux" " FOUND")
 elseif (MAC)
@@ -71,7 +69,6 @@ elseif (WIN32)
 else ()
   message(STATUS ">>> Unknown" " FOUND")
 endif ()
-
 
 
 #

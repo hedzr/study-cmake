@@ -8,10 +8,10 @@
 #define xT(str)                str
 
 /*  NB: this file is parsed by automatic tools so don't change its format! */
-#define xMAJOR_VERSION      @xVERSION_MAJOR@
-#define xMINOR_VERSION      @xVERSION_MINOR@
-#define xRELEASE_NUMBER     @xVERSION_MICRO@
-#define xPATCH_NUMBER       @xVERSION_PATCH@
+#define xMAJOR_VERSION      @PROJECT_VERSION_MAJOR@
+#define xMINOR_VERSION      @PROJECT_VERSION_MINOR@
+#define xRELEASE_NUMBER     @PROJECT_VERSION_MICRO@
+#define xPATCH_NUMBER       @PROJECT_VERSION_PATCH@
 
 #define xVERSION_STRING     xT("@PROJECT_VERSION@")
 #define xARCHIVE_NAME       xT("@ARCHIVE_NAME@")
