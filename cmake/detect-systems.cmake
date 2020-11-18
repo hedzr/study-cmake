@@ -23,7 +23,18 @@
 # cygwin                        CYGWIN_NT-5.1
 # MacOSX                        Darwin
 
-if (UNIX AND NOT APPLE)
+# for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" OR APPLE)
+  #MESSAGE("** Darwin detected.")
+  SET(MACOSX TRUE)
+  SET(MACOS TRUE)
+  SET(macOS TRUE)
+  SET(DARWIN TRUE)
+  SET(MAC TRUE)
+  SET(Mac TRUE)
+endif ()
+
+if (UNIX AND NOT MACOS)
   # for Linux, BSD, Solaris, Minix
   if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set(LINUX TRUE)
@@ -33,18 +44,6 @@ if (UNIX AND NOT APPLE)
   elseif (${CMAKE_SYSTEM_NAME} MATCHES "Minix")
     set(Minix TRUE)
   endif ()
-endif ()
-
-#if (APPLE)
-# for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  MESSAGE("** Darwin detected.")
-  SET(MACOSX TRUE)
-  SET(MACOS TRUE)
-  SET(macOS TRUE)
-  SET(DARWIN TRUE)
-  SET(MAC TRUE)
-  SET(Mac TRUE)
 endif ()
 
 if (WIN32)

@@ -24,7 +24,7 @@ message(STATUS "This is muchs-SOURCE dir " ${library-1_SOURCE_DIR})
 message(STATUS "This is muchs-INCLUDE dir " ${CMAKE_CURRENT_SOURCE_DIR}/include)
 message(STATUS "This is PROJECT_SOURCE_DIR dir " ${PROJECT_SOURCE_DIR})
 
-debugValue(SC14R_INCS)
+debug_print_value(SC14R_INCS)
 
 
 # The muchs library ---------------
@@ -33,7 +33,7 @@ debugValue(SC14R_INCS)
 file(GLOB_RECURSE header_files ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hh)
 list(APPEND source_files library.cc)
 # debugValue(source_files)
-debugValue(header_files)
+debug_print_value(header_files)
 
 # library
 add_library(muchs STATIC ${source_files} ${header_files})

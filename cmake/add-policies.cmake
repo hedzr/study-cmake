@@ -16,11 +16,12 @@ if (COMMAND cmake_policy)
   cmake_policy(SET CMP0003 NEW)
 endif ()
 
-cmake_policy(SET CMP0048 NEW)
 
-cmake_policy(SET CMP0054 NEW) # ENABLE CMP0054: Only interpret if() arguments as variables or keywords when unquoted.
 cmake_policy(SET CMP0042 NEW) # ENABLE CMP0042: MACOSX_RPATH is enabled by default.
+cmake_policy(SET CMP0048 NEW)
+cmake_policy(SET CMP0054 NEW) # ENABLE CMP0054: Only interpret if() arguments as variables or keywords when unquoted.
 cmake_policy(SET CMP0063 NEW) # ENABLE CMP0063: Honor visibility properties for all target types.
+cmake_policy(SET CMP0069 NEW)
 cmake_policy(SET CMP0077 NEW) # ENABLE CMP0077: option() honors normal variables
 
 if (POLICY CMP0068)

@@ -10,13 +10,14 @@
 /*  NB: this file is parsed by automatic tools so don't change its format! */
 #define xMAJOR_VERSION      @PROJECT_VERSION_MAJOR@
 #define xMINOR_VERSION      @PROJECT_VERSION_MINOR@
-#define xRELEASE_NUMBER     @PROJECT_VERSION_MICRO@
 #define xPATCH_NUMBER       @PROJECT_VERSION_PATCH@
+#define xRELEASE_NUMBER     @PROJECT_VERSION_TWEAK@
 
+#define xPROJECT_NAME       xT("@PROJECT_NAME@")
 #define xVERSION_STRING     xT("@PROJECT_VERSION@")
 #define xARCHIVE_NAME       xT("@ARCHIVE_NAME@")
 
-#define GIT_BRANCH          xT("@GIT_BRANCH@")
-#define GIT_COMMIT_HASH     xT("@GIT_COMMIT_HASH@")
+#define xGIT_BRANCH         xT("@GIT_BRANCH@")
+#define xGIT_COMMIT_HASH    xT("@GIT_COMMIT_HASH@")
 
 #endif //SM_VERSION_H

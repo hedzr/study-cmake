@@ -5,14 +5,195 @@ macro(debug msg)
   message(STATUS "DEBUG ${msg}")
 endmacro()
 
-macro(debugValue variableName)
+macro(debug_print_value variableName)
   debug("${variableName}=\${${variableName}}")
 endmacro()
 
+macro(dump_list listName)
+  message("- List of ${listName} -------------")
+  foreach (lib ${${listName}})
+    message("                         ${lib}")
+  endforeach (lib)
+endmacro()
 
-MACRO(with_flex_bison libName prefixName outputDir)
-  FIND_PACKAGE(FLEX 2.6)
-  FIND_PACKAGE(BISON 2.7)
+macro(debug_print_hbar)
+  message("|-----------------------------------")
+endmacro()
+
+macro(debug_print_hbar_long)
+  message("|------------------------------------------------------------------------")
+endmacro()
+
+macro(debug_print_project_title)
+  message("|------------------------------------------------------------------------")
+  message("| Making current project(${PROJECT_NAME}) for archive ${ARCHIVE_NAME} ...")
+  message("|------------------------------------------------------------------------")
+endmacro()
+
+
+macro(debug_print_project_vars)
+  debug_print_project_title()
+  message("  CMAKE_BINARY_DIR:         ${CMAKE_BINARY_DIR}")
+  message("  CMAKE_CURRENT_BINARY_DIR: " ${CMAKE_CURRENT_BINARY_DIR})
+  message("  CMAKE_CURRENT_SOURCE_DIR: " ${CMAKE_CURRENT_SOURCE_DIR})
+  message("  CMAKE_MODULE_PATH:        " ${CMAKE_MODULE_PATH})
+  message("  CMAKE_SYSTEM_NAME:        ${CMAKE_SYSTEM_NAME}")
+  message("  CMAKE_SYSTEM_VERSION:     ${CMAKE_SYSTEM_VERSION}")
+  message("  CMAKE_SYSTEM_PROCESSOR:   ${CMAKE_SYSTEM_PROCESSOR}")
+  message("  CMAKE_C_COMPILER:         ${CMAKE_C_COMPILER}")
+  message("  CMAKE_CXX_COMPILER:       ${CMAKE_CXX_COMPILER}")
+  message("  CMAKE_BUILD_TYPE:         ${CMAKE_BUILD_TYPE}")
+
+
+  # project info
+  message("  PROJECT_VERSION:          ${PROJECT_VERSION}")
+  message("  ARCHIVE_NAME:             ${ARCHIVE_NAME}")
+
+  message(STATUS "  CXX_FLAGS                  = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_TYPE}})
+  #message(STATUS "  PQXX: " ${Pqxx_INCLUDE_DIRS} "; version: " ${Pqxx_VERSION_STRING})
+  #message(STATUS "  CMAKE_REQUIRED_DEFINITIONS = " ${CMAKE_REQUIRED_DEFINITIONS})
+  message(STATUS "  COMPILE_DEFINITIONS        = " ${COMPILE_DEFINITIONS})
+  message(STATUS "  INCLUDE_DIRECTORIES        = ")
+
+  get_directory_property(dirs INCLUDE_DIRECTORIES)
+  dump_list(${dirs})
+  #  foreach (dir ${dirs})
+  #    message(STATUS "                       dir = '${dir}'")
+  #  endforeach ()
+endmacro()
+
+
+function(debug_dump_cmake_environments)
+  execute_process(COMMAND "${CMAKE_COMMAND}" "-E" "environment")
+endfunction()
+
+
+macro(debug_print_top_vars)
+
+  # ----------------------------------------------------------------------
+  # Information Summary
+  # ----------------------------------------------------------------------
+  # cmake info
+  message("------------------------------------------------------------------------")
+  message("CMAKE_SOURCE_DIR:        ${CMAKE_SOURCE_DIR}")
+  message("CMAKE_BINARY_DIR:        ${CMAKE_BINARY_DIR}")
+  #message("EXECUTABLE_OUTPUT_PATH:  ${EXECUTABLE_OUTPUT_PATH}")
+  #message("LIBRARY_OUTPUT_PATH:     ${LIBRARY_OUTPUT_PATH}")
+  message("CMAKE_SYSTEM_NAME+VER:   ${CMAKE_SYSTEM_NAME} ${CMAKE_SYSTEM_VERSION}")
+  message("CMAKE_SYSTEM_PROCESSOR:  ${CMAKE_SYSTEM_PROCESSOR}")
+  message("CMAKE_C_COMPILER:        ${CMAKE_C_COMPILER}")
+  message("CMAKE_CXX_COMPILER:      ${CMAKE_CXX_COMPILER}")
+  message("CMAKE_BUILD_TYPE:        ${CMAKE_BUILD_TYPE}")
+
+  # project info
+  message("-------------------------")
+  message("PROJECT_VERSION:         ${PROJECT_VERSION}")
+  message("ARCHIVE_NAME:            ${ARCHIVE_NAME}")
+  message("-------------------------")
+  message("EXECUTABLE_OUTPUT_PATH:  ${EXECUTABLE_OUTPUT_PATH}")
+  message("LIBRARY_OUTPUT_PATH:     ${LIBRARY_OUTPUT_PATH}")
+
+  # dependency info
+  message("-------------------------")
+  message("SKIA:                    ${ENABLE_SKIA} -> ${USE_SKIA}")
+  message("CAIRO:                   ${ENABLE_CAIRO} -> ${USE_CAIRO}")
+  message("GLX:                     ${ENABLE_GLX} -> ${USE_GLX}")
+  message("EGL:                     ${ENABLE_EGL} -> ${USE_EGL}")
+  message("GLUT:                    ${ENABLE_GLUT} -> ${USE_GLUT}")
+  message("OPENGLES2:               ${OPENGLES2_FOUND}")
+  message("OPENGLES3:               ${OPENGLES3_FOUND}")
+  message("CAIROGLES:               ${ENABLE_CAIROGLES}")
+  message("CAIRO:                   ${CAIRO_INCLUDE_DIRS}")
+  message("SDL2:                    ${SDL2_INCLUDE_DIR} | libs: ${SDL2_LIBRARY}")
+  if (ENABLE_SKIA)
+    message("SKIA:                    ${SKIA_INCLUDE_DIRS}")
+  endif ()
+  message("X11:                     ${X11_LIBRARIES}")
+
+  #message("-------------------------")
+  #message("LIBS:")
+  #foreach (lib ${C14R_LIBS})
+  #  message("                         ${lib}")
+  #endforeach (lib)
+  #message("-------------------------")
+  #message("INCLUDES:")
+  #foreach (inc ${CMAKE_INCLUDES})
+  #  message("                         ${inc}")
+  #endforeach (inc)
+  #message("INCLUDES (SYS):")
+  #foreach (inc ${C14R_INCS_SYS})
+  #  message("                         ${inc}")
+  #endforeach (inc)
+  message("------------------------------------------------------------------------")
+
+endmacro()
+
+
+#function(debug_dump_cmake_variables)
+#  get_cmake_property(_variableNames VARIABLES)
+#  list(SORT _variableNames)
+#  foreach (_variableName ${_variableNames})
+#    if (ARGV0)
+#      unset(MATCHED)
+#      string(REGEX MATCH ${ARGV0} MATCHED ${_variableName})
+#      if (NOT MATCHED)
+#        continue()
+#      endif ()
+#    endif ()
+#    message(STATUS "${_variableName}=${${_variableName}}")
+#  endforeach ()
+#endfunction()
+
+# help:
+#    debug_dump_cmake_variables("^Boost")
+#    debug_dump_cmake_variables()
+function(debug_dump_cmake_variables)
+  get_cmake_property(_variableNames VARIABLES)
+  list(SORT _variableNames)
+  foreach (_variableName ${_variableNames})
+    if (ARGV0)
+      unset(MATCHED)
+
+      #case sensitive match
+      # string(REGEX MATCH ${ARGV0} MATCHED ${_variableName})
+      #
+      #case insenstitive match
+      string(TOLOWER "${ARGV0}" ARGV0_lower)
+      string(TOLOWER "${_variableName}" _variableName_lower)
+      string(REGEX MATCH ${ARGV0_lower} MATCHED ${_variableName_lower})
+
+      if (NOT MATCHED)
+        continue()
+      endif ()
+    endif ()
+    message(STATUS "${_variableName} = ${${_variableName}}")
+  endforeach ()
+endfunction()
+
+
+function(with_ipo_supports)
+  # Interprocedural optimization
+  # https://cliutils.gitlab.io/modern-cmake/chapters/features/small.html
+  include(CheckIPOSupported) # need decl at first: cmake_minimum_required(VERSION 3.9..3.13)
+  check_ipo_supported(RESULT result)
+  if (result)
+    if (ARGV0)
+      set_target_properties("${ARGV0}" PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+      message(" -- IPO support enabled for: ${ARGV0}")
+    endif ()
+  endif ()
+endfunction()
+
+
+macro(with_flex_bison libName prefixName outputDir)
+  if (APPLE)
+    list(APPEND CMAKE_PROGRAM_PATH "/usr/local/opt/flex/bin" "/usr/local/opt/bison/bin")
+  endif ()
+
+  find_package(FLEX 2.6)
+  find_package(BISON 2.7)
+  #  FIND_PACKAGE(FLEX 2.5)
+  #  FIND_PACKAGE(BISON 2.3)
 
   # ----------------------
   # about gcc warnings:
@@ -20,51 +201,51 @@ MACRO(with_flex_bison libName prefixName outputDir)
   # about cmake doc:
   #	http://www.cmake.org/cmake/help/v2.8.8/cmake.html
 
-  ADD_DEFINITIONS("-DYYDEBUG=1")
-  IF (outputDir STREQUAL "")
-    SET(TARGET_DIR "${CMAKE_BINARY_DIR}/generated")
-  ELSE ()
-    SET(TARGET_DIR "${outputDir}")
-  ENDIF ()
+  add_definitions("-DYYDEBUG=1")
+  if (outputDir STREQUAL "")
+    set(TARGET_DIR "${CMAKE_BINARY_DIR}/generated")
+  else ()
+    set(TARGET_DIR "${outputDir}")
+  endif ()
 
   #IF (NOT ${BISON_EXECUTABLE} STREQUAL "")
-  IF (BISON_FOUND)
-    MESSAGE(STATUS "BISON ${BISON_VERSION} FOUND: " ${BISON_EXECUTABLE})
-    BISON_TARGET(${prefixName}Parser
+  if (BISON_FOUND)
+    message(STATUS "BISON ${BISON_VERSION} FOUND: " ${BISON_EXECUTABLE})
+    bison_target(${prefixName}Parser
             ${CMAKE_CURRENT_SOURCE_DIR}/parser.yy
             ${TARGET_DIR}/${prefixName}.parser.cc
             COMPILE_FLAGS "--xml"
             DEFINES_FILE ${TARGET_DIR}/${prefixName}.parser.hh
             VERBOSE ${TARGET_DIR}/${prefixName}.parser.grammer.txt
-            REPORT_FILE ${TARGET_DIR}/${prefixName}.parser.grammer.rpt)
-    IF (FLEX_FOUND)
-      MESSAGE(STATUS "FLEX ${FLEX_VERSION} FOUND: " ${FLEX_EXECUTABLE} ", inc: " ${FLEX_INCLUDE_DIR})
-      FLEX_TARGET(${prefixName}Scanner
+            REPORT_FILE ${TARGET_DIR}/${prefixName}.parser.grammer.rpt
+            )
+    if (FLEX_FOUND)
+      message(STATUS "FLEX ${FLEX_VERSION} FOUND: " ${FLEX_EXECUTABLE} ", INC: " ${FLEX_INCLUDE_DIRS} "|" ${FLEX_INCLUDE_DIR}", LIBS: " ${FLEX_LIBRARIES})
+      # message(STATUS "FLEX ${FLEX_VERSION} FOUND: " ${FLEX_EXECUTABLE} ". LIBS: " ${FLEX_LIBRARIES})
+      flex_target(${prefixName}Scanner
               ${CMAKE_CURRENT_SOURCE_DIR}/scanner.ll
               ${TARGET_DIR}/${prefixName}.scanner.cc)
-      ADD_FLEX_BISON_DEPENDENCY(${prefixName}Scanner ${prefixName}Parser)
-      SET_SOURCE_FILES_PROPERTIES(${prefixName}.scanner.cc PROPERTIES COMPILE_FLAGS "-Wno-error=conversion -Wno-conversion -Wno-sign-conversion -Wno-sign-compare")  # -Wno-int-conversion
-    ENDIF ()
-    SET_SOURCE_FILES_PROPERTIES(${prefixName}.parser.cc PROPERTIES COMPILE_FLAGS "-Wno-error=conversion -Wno-conversion -Wno-sign-conversion")
-  ENDIF ()
+      add_flex_bison_dependency(${prefixName}Scanner ${prefixName}Parser)
+      set_source_files_properties(${prefixName}.scanner.cc PROPERTIES COMPILE_FLAGS "-Wno-error=conversion -Wno-conversion -Wno-sign-conversion -Wno-sign-compare")  # -Wno-int-conversion
+    endif ()
+    set_source_files_properties(${prefixName}.parser.cc PROPERTIES COMPILE_FLAGS "-Wno-error=conversion -Wno-conversion -Wno-sign-conversion")
+  endif ()
 
 
   ####################################
 
-  ADD_LIBRARY(${libName} STATIC
+  add_library(${libName} STATIC
           #${THELIB_SRCS}
           ${BISON_${prefixName}Parser_OUTPUTS}
           ${FLEX_${prefixName}Scanner_OUTPUTS}
           )
-  TARGET_LINK_LIBRARIES(${libName}
+  target_link_libraries(${libName}
           #${THELIB_LIBS}
           #pthread
+          #${FLEX_LIBRARIES}
           )
 
-ENDMACRO()
-
-
-
+endmacro()
 
 
 # Macro to declare a dependent option with more convenient syntax
@@ -573,8 +754,6 @@ function(install_plugin_targets)
 endfunction()
 
 
-
-
 # https://stackoverflow.com/questions/7787823/cmake-how-to-get-the-name-of-all-subdirectories-of-a-directory
 
 # Usage:
@@ -586,14 +765,14 @@ endfunction()
 #	      ADD_SUBDIRECTORY(${subdir})
 #   ENDFOREACH()
 
-FUNCTION(subdir_list result curdir)
-  MESSAGE("curdir = ${curdir}")
-  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
-  SET(dirlist "")
-  FOREACH (child ${children})
-    IF (IS_DIRECTORY ${curdir}/${child})
-      LIST(APPEND dirlist ${child})
-    ENDIF ()
-  ENDFOREACH ()
-  SET(${result} ${dirlist} PARENT_SCOPE)
-ENDFUNCTION()
+function(subdir_list result curdir)
+  message("curdir = ${curdir}")
+  file(GLOB children RELATIVE ${curdir} ${curdir}/*)
+  set(dirlist "")
+  foreach (child ${children})
+    if (IS_DIRECTORY ${curdir}/${child})
+      list(APPEND dirlist ${child})
+    endif ()
+  endforeach ()
+  set(${result} ${dirlist} PARENT_SCOPE)
+endfunction()

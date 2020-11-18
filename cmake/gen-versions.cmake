@@ -27,17 +27,23 @@ if (NOT GIT_COMMIT_HASH)
   set(GIT_REV "0")
 endif ()
 
-message(STATUS "Git current branch: ${GIT_BRANCH}")
-message(STATUS "Git commit hash:    ${GIT_COMMIT_HASH}")
-message(STATUS "Git rev:            ${GIT_REV}")
+message(STATUS "- Git current branch: ${GIT_BRANCH}")
+message(STATUS "- Git commit hash:    ${GIT_COMMIT_HASH}")
+message(STATUS "- Git rev:            ${GIT_REV}")
 
+if (CMAKE_GENERATED_DIR)
+else ()
+  message(FATAL " >> ERROR: please include target-dirs.cmake at first.")
+  # we need CMAKE_GENERATED_DIR at present.
+endif ()
 
 if (EXISTS ${xVERSION_IN})
-  message(STATUS "Generating version.h from ${xVERSION_IN} ...")
+  message(STATUS "Generating version.h from ${xVERSION_IN} to ${CMAKE_GENERATED_DIR} - Version ${PROJECT_VERSION}...")
   configure_file(
           ${xVERSION_IN}
-          ${CMAKE_BINARY_DIR}/generated/version.h
+          ${CMAKE_GENERATED_DIR}/version.h
   )
+  message(STATUS "Generated: ${CMAKE_GENERATED_DIR}/version.h")
 endif ()
 
 
