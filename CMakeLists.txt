@@ -60,3 +60,4 @@ add_subdirectory(z02-library-1)
 add_subdirectory(z03-library-2)
 add_subdirectory(z04-header-library)
 
+add_subdirectory(z11-m1)
