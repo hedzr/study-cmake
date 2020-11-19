@@ -1,8 +1,9 @@
-project(library-3)
+project(library-4)
 
 list(APPEND SC14R_INCS
         ${PROJECT_SOURCE_DIR}
         ${PROJECT_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/include.3rd
         ${PROJECT_SOURCE_DIR}/src
         ${PROJECT_SOURCE_DIR}/src/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -53,6 +54,6 @@ target_compile_features(monid INTERFACE cxx_std_11)
 # The sources shared between the main program and the tests
 set(PROJECT_SOURCES main.cc)
 
-add_executable(library-3-test-program ${PROJECT_SOURCES})
-target_link_libraries(library-3-test-program PRIVATE monid)
+add_executable(library-4-test-program ${PROJECT_SOURCES})
+target_link_libraries(library-4-test-program PRIVATE monid)
 

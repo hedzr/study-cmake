@@ -1,0 +1,1 @@
+A template for child cmake project here.
