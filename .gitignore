@@ -4,6 +4,7 @@ _msvc_build/
 cmake-build-debug/
 bin/
 ref/
+build/
 
 CMakeLists.txt.user
 CMakeCache.txt

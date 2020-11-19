@@ -5,6 +5,6 @@
 #include "mucht/mucht.hh"
 
 int main() {
-  hello("mucht world");
+    hello("mucht world");
 }
 

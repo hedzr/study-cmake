@@ -35,6 +35,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${ZLIB_LIBRARIES})
 #
 
 if (BUILD_TESTING)
+    message("tests enabled")
     add_subdirectory(tests)
 endif ()
 

@@ -48,7 +48,6 @@ debug_print_top_vars()
 debug_print_value(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 
 
-
 #add_subdirectory(third-party/catch)
 #add_subdirectory(src)
 #add_subdirectory(test)

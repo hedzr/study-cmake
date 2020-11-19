@@ -5,6 +5,6 @@
 #include <monid/monid.h>
 
 int main() {
-  hello("monid world");
+    hello("monid world");
 }
 

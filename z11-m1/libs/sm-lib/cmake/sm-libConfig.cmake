@@ -6,7 +6,7 @@ include(CMakeFindDependencyMacro)
 find_dependency(ZLIB REQUIRED)
 
 ## Import the targets
-if(NOT TARGET sm-lib::sm-lib)
-    #include("${SM_LIB_CMAKE_DIR}/sm-libTargets.cmake")
-    include("${CMAKE_CURRENT_LIST_DIR}/sm-libTargets.cmake")
-endif()
+if (NOT TARGET sm-lib::sm-lib)
+  #include("${SM_LIB_CMAKE_DIR}/sm-libTargets.cmake")
+  include("${CMAKE_CURRENT_LIST_DIR}/sm-libTargets.cmake")
+endif ()
