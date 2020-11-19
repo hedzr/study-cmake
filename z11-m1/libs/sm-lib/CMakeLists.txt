@@ -1,0 +1,64 @@
+cmake_minimum_required(VERSION 3.5)
+project(sm-lib VERSION 1.0.0 LANGUAGES CXX)
+
+find_package(ZLIB REQUIRED)
+
+#if ( ZLIB_FOUND )
+#    include_directories( ${ZLIB_INCLUDE_DIRS} )
+#    target_link_libraries( YourProject ${ZLIB_LIBRARIES} )
+#endif( ZLIB_FOUND )
+
+#if (ZLIB_FOUND)
+#    debug_print_value(ZLIB_INCLUDE_DIRS)
+#    debug_print_value(ZLIB_LIBRARIES)
+#endif ()
+
+#
+# A Target:
+#
+add_library(${PROJECT_NAME})
+add_library(libs::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
+target_sources(${PROJECT_NAME} PRIVATE src/${PROJECT_NAME}.cc)
+target_include_directories(${PROJECT_NAME}
+        PUBLIC
+        $<INSTALL_INTERFACE:include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        PRIVATE
+        ${ZLIB_INCLUDE_DIRS}
+        )
+target_link_libraries(${PROJECT_NAME} PRIVATE ${ZLIB_LIBRARIES})
+
+#
+# Testing
+#
+
+if (BUILD_TESTING)
+    add_subdirectory(tests)
+endif ()
+
+#
+# Installing
+#
+
+include(GNUInstallDirs)     # for 
+install(TARGETS ${PROJECT_NAME}
+        EXPORT ${PROJECT_NAME}Targets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        )
+
+install(EXPORT ${PROJECT_NAME}Targets
+        FILE ${PROJECT_NAME}Targets.cmake
+        NAMESPACE ${PROJECT_NAME}::
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+
+install(DIRECTORY include/${PROJECT_NAME}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        )
+
+install(FILES
+        ${CMAKE_CURRENT_LIST_DIR}/cmake/${PROJECT_NAME}Config.cmake
+        DESTINATION
+        ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
