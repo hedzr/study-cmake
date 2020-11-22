@@ -5,11 +5,12 @@ cmake_minimum_required(VERSION 3.9..3.19)
 #set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
 set(CMAKE_SCRIPTS "cmake")
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/modules;${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS};${CMAKE_MODULE_PATH}")
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/modules;${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS};${CMAKE_SOURCE_DIR};${CMAKE_MODULE_PATH}")
 #list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/Modules:${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}")
 #message("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}") ###
 
 
+include(.version)
 include(add-policies)     # ${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/
 include(detect-systems)
 include(target-dirs)
@@ -17,7 +18,7 @@ include(utils)
 
 
 project(study-cmake
-        VERSION 0.3.1.2
+        VERSION ${VERSION}
         DESCRIPTION "study for cmake"
         LANGUAGES C CXX)
 

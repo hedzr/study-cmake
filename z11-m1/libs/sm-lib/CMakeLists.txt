@@ -43,7 +43,34 @@ endif ()
 # Installing
 #
 
-include(GNUInstallDirs)     # for 
+# Must use GNUInstallDirs to install libraries into correct locations on all platforms.
+include(GNUInstallDirs)
+foreach (dir
+        BINDIR
+        SBINDIR
+        LIBEXECDIR
+        SYSCONFDIR
+        SHAREDSTATEDIR
+        LOCALSTATEDIR
+        RUNSTATEDIR
+        LIBDIR
+        INCLUDEDIR
+        OLDINCLUDEDIR
+        DATAROOTDIR
+        DATADIR
+        INFODIR
+        LOCALEDIR
+        MANDIR
+        DOCDIR
+        )
+    # GNUInstallDirs_get_absolute_install_dir(CMAKE_INSTALL_FULL_${dir} CMAKE_INSTALL_${dir})
+    debug_print_value(CMAKE_INSTALL_FULL_${dir})
+endforeach ()
+#debug_print_value(
+#        CMAKE_INSTALL_LIBDIR
+#)
+#message("${CMAKE_INSTALL_LIBDIR}")
+
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}Targets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

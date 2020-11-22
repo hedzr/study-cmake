@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
-set -x
+set -e; [[ $DEBUG -ne 0 ]] && set -x
 
 
 BUILD_DIR='build/'
