@@ -11,8 +11,8 @@
 
 #include <iostream>
 
-inline void hello(std::string const& name) {
-  std::cout << "Hello, " << name << "!\n";
+inline void hello(std::string const &name) {
+    std::cout << "Hello, " << name << "!\n";
 }
 
 #endif //STUDY_CMAKE_MONID_HH

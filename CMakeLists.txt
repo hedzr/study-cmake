@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9..3.13)
+cmake_minimum_required(VERSION 3.9..3.19)
 #cmake_minimum_required(VERSION 3.13)
 #mark_as_advanced(CMAKE_BACKWARDS_COMPATIBILITY)
 # saner control structure syntax
@@ -46,7 +46,6 @@ debug_print_top_vars()
 # add_subdirectory(z04-header-library)
 
 debug_print_value(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
-
 
 
 #add_subdirectory(third-party/catch)

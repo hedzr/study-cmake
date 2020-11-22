@@ -5,6 +5,6 @@
 #include "muchs/muchs.hh"
 
 int main() {
-  hello("muchs world");
+    hello("muchs world");
 }
 

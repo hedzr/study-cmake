@@ -5,6 +5,6 @@
 #include "muchs/muchs.hh"
 #include <iostream>
 
-void hello(std::string const& name) {
-  std::cout << "Hello, " << name << "!\n";
+void hello(std::string const &name) {
+    std::cout << "Hello, " << name << "!\n";
 }
