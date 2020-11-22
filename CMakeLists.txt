@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9..3.13)
+cmake_minimum_required(VERSION 3.9..3.19)
 #cmake_minimum_required(VERSION 3.13)
 #mark_as_advanced(CMAKE_BACKWARDS_COMPATIBILITY)
 # saner control structure syntax
