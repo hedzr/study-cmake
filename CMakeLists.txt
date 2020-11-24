@@ -20,20 +20,21 @@ include(setup-build-env)
 include(versions-gen)
 
 debug_print_top_vars()
+# debug_print_value(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 
 
 # add_subdirectory(third-party/catch)
 # add_subdirectory(src)
 # add_subdirectory(test)
-
+#
 # add_library(study_cmake library.cxx library.h)
 
 
-debug_print_value(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
-
+# Classical CMake style
 add_subdirectory(z01-hello-1)
 add_subdirectory(z02-library-1)
 add_subdirectory(z03-library-2)
 add_subdirectory(z04-header-library)
 
+# Modern CMake samples. The first is m1:
 add_subdirectory(z11-m1)

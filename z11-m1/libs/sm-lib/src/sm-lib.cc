@@ -9,6 +9,8 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <memory>
+#include <cstring>
 
 #include <zlib.h>
 

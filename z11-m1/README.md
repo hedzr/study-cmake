@@ -17,10 +17,11 @@ cmake --build build/
 
 ```bash
 cd z11-m1/
+# preparing the building scripts
 cmake -S libs/sm-lib -B libs/sm-lib/build
-# Or `cmake -D BUILD_TESTING=OFF -S libs/sm-lib -B libs/sm-lib/build` to skip tests
-# And `cmake -D BUILD_TESTING=ON -S libs/sm-lib -B libs/sm-lib/build` to enable tests
+# make building
 cmake --build libs/sm-lib/build
+# make installing
 cmake --build libs/sm-lib/build --target install
 ```
 

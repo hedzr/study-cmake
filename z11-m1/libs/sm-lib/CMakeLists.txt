@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(sm-lib VERSION 1.0.0 LANGUAGES CXX)
-
+include(CTest)
 find_package(ZLIB REQUIRED)
 
 #if ( ZLIB_FOUND )

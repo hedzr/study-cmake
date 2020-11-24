@@ -7,6 +7,7 @@
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
+#include <string.h>
 #include "sm-lib/sm-lib.hh"
 
 // from https://panthema.net/2007/0328-ZLibString.html
