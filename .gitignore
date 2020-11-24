@@ -1,10 +1,12 @@
 _build/
 _msvc_build/
 .idea/
-cmake-build-debug/
-bin/
-ref/
-build/
+cmake-build-debug*/
+**/bin/
+**/ref/
+**/build/
+
+sa-cc/
 
 CMakeLists.txt.user
 CMakeCache.txt
