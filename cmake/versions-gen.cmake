@@ -2,6 +2,18 @@
 
 # https://github.com/pmirshad/cmake-with-git-metadata/blob/master/CMakeLists.txt
 
+
+if (DEFINED ARCHIVE_NAME)
+else()
+  set(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${PROJECT_VERSION})
+endif()
+
+if (DEFINED xVERSION_IN)
+else()
+  set(xVERSION_IN ${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/version.h.in)
+endif ()
+message("Using version.in file: ${xVERSION_IN}, ARCHIVE_NAME = ${ARCHIVE_NAME}")
+
 if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
   execute_process(
           COMMAND git rev-parse --abbrev-ref HEAD

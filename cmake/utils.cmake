@@ -1,4 +1,6 @@
 
+include(CMakePrintHelpers)
+include(FeatureSummary)
 
 
 macro(debug msg)

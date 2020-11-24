@@ -21,6 +21,11 @@ add_library(libs::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
 target_sources(${PROJECT_NAME} PRIVATE src/${PROJECT_NAME}.cc)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${ZLIB_LIBRARIES})
+#set_target_properties(${PROJECT_NAME} PROPERTIES
+#        COMPILE_FEATURES cxx_std_14
+#        SOURCES src/${PROJECT_NAME}.cc
+#        )
 target_include_directories(${PROJECT_NAME}
         PUBLIC
         $<INSTALL_INTERFACE:include>
@@ -28,7 +33,7 @@ target_include_directories(${PROJECT_NAME}
         PRIVATE
         ${ZLIB_INCLUDE_DIRS}
         )
-target_link_libraries(${PROJECT_NAME} PRIVATE ${ZLIB_LIBRARIES})
+
 
 #
 # Testing

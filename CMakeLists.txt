@@ -10,7 +10,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/modules;${CMAKE_SOUR
 #message("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}") ###
 
 
-include(.version)
+include(version-def)
 include(add-policies)     # ${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/
 include(detect-systems)
 include(target-dirs)
@@ -22,15 +22,10 @@ project(study-cmake
         DESCRIPTION "study for cmake"
         LANGUAGES C CXX)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-# set(CMAKE_CXX_EXTENSIONS OFF)
-
+include(cxx-standard-def)
+include(cxx-detect-compilers)
 include(setup-build-env)
-
-set(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${PROJECT_VERSION})
-set(xVERSION_IN ${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/version.h.in)
-include(gen-versions)
+include(versions-gen)
 
 debug_print_top_vars()
 

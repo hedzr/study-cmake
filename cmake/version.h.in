@@ -2,8 +2,8 @@
 // Created by Hedzr Yeh on 2019-01-28.
 //
 
-#ifndef SM_VERSION_H
-#define SM_VERSION_H
+#ifndef ___VERSION_H
+#define ___VERSION_H
 
 #define xT(str)                str
 
@@ -20,4 +20,4 @@
 #define xGIT_BRANCH         xT("@GIT_BRANCH@")
 #define xGIT_COMMIT_HASH    xT("@GIT_COMMIT_HASH@")
 
-#endif //SM_VERSION_H
+#endif //___VERSION_H
