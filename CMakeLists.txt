@@ -38,3 +38,6 @@ add_subdirectory(z04-header-library)
 
 # Modern CMake samples. The first is m1:
 add_subdirectory(z11-m1)
+
+#
+apply_all_unit_tests(all_tests)

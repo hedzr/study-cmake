@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
 project(sm-lib VERSION 1.0.0 LANGUAGES CXX)
-include(CTest)
 find_package(ZLIB REQUIRED)
 
 #if ( ZLIB_FOUND )
@@ -35,22 +34,22 @@ target_include_directories(${PROJECT_NAME}
         )
 
 # for debugging
-file(GENERATE OUTPUT ${CMAKE_GENERATED_DIR}/abc.log CONTENT
+file(GENERATE OUTPUT ${CMAKE_BINARY_DIR}/generated/abc.log CONTENT
         "-I$<JOIN:$<TARGET_PROPERTY:${PROJECT_NAME},INCLUDE_DIRECTORIES>, -I>"
         # "$<TARGET_FILE:${PROJECT_NAME}>"
         # "$<INSTALL_INTERFACE:include> - $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
         )
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E echo
-        ">> INSTALL_INTERFACE \$<INSTALL_INTERFACE:include> = $<INSTALL_INTERFACE:include>")
+#add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E echo
+#        ">> INSTALL_INTERFACE \$<INSTALL_INTERFACE:include> = $<INSTALL_INTERFACE:include>")
 
 #
 # Testing
 #
 
 if (BUILD_TESTING)
-    message("tests enabled")
-    add_subdirectory(tests)
+    # add_subdirectory(tests)
+#    add_unit_test(${PROJECT_NAME} tests sm_lib_tests)
 endif ()
 
 #

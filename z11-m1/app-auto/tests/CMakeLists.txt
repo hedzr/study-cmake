@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(sm_lib_tests)
+project(sm_lib_app_tests)
 
 add_executable(${PROJECT_NAME}
         main.cc

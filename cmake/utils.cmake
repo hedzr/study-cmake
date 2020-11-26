@@ -173,6 +173,38 @@ function(debug_dump_cmake_variables)
 endfunction()
 
 
+macro(add_unit_test target target_dirname target_test)
+  # set(UNIT_TEST_TARGETS ${UNIT_TEST_TARGETS} ${target_test} PARENT_SCOPE)
+  
+  get_property(tmp GLOBAL PROPERTY UNIT_TEST_TARGETS)
+  #set(tmp ${UNIT_TEST_TARGETS} ${CMAKE_CURRENT_BINARY_DIR}/${target_dirname})
+  set(tmp ${UNIT_TEST_TARGETS} ${target_test})
+  set_property(GLOBAL PROPERTY UNIT_TEST_TARGETS "${tmp}")
+
+  message(">> tests enabled for ${target}: adding subdir '${target_dirname}' as target '${target_test}' ")
+  add_subdirectory(${target_dirname})
+  # add_test(target ${CMAKE_CURRENT_BINARY_DIR}/${target_test})
+  add_test(NAME ${target_test} COMMAND $<TARGET_FILE:${target_test}>)
+  message(">> add_test(${target_test} -> ${target})")
+endmacro(add_unit_test)
+
+macro(apply_all_unit_tests tests_name)
+  get_property(tmp GLOBAL PROPERTY UNIT_TEST_TARGETS)
+  # message("UNIT_TEST_TARGETS: ${tmp}")
+  add_custom_target(${tests_name} ALL
+          DEPENDS ${tmp}
+          )
+  add_custom_command(TARGET ${tests_name}
+          POST_BUILD COMMAND echo ARGS "   CONFIG = $<CONFIG> "
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+          )
+  add_custom_command(TARGET ${tests_name}
+          COMMENT ">> Run tests for: ${tmp} ..."
+          POST_BUILD COMMAND ctest ARGS --output-on-failure
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+          )
+endmacro()
+
 function(with_ipo_supports)
   # Interprocedural optimization
   # https://cliutils.gitlab.io/modern-cmake/chapters/features/small.html

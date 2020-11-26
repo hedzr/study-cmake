@@ -9,3 +9,7 @@ target_compile_features(sm-app-auto PRIVATE cxx_std_11)
 target_link_libraries(sm-app-auto
         PRIVATE
         libs::sm-lib)
+
+if (BUILD_TESTING)
+    add_unit_test(${PROJECT_NAME} tests sm_lib_app_tests)
+endif ()

@@ -5,7 +5,7 @@ include(prerequisites)
 include(version-def)
 include(add-policies)
 include(detect-systems)
-#include(target-dirs)
+include(target-dirs)
 include(utils)
 
 
