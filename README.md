@@ -5,7 +5,7 @@
 ```bash
 # generate the building config
 cmake -B build/
-# build the while project (with unittest too)
+# build the whole project (with unittest too)
 cmake --build build/
 ```
 
