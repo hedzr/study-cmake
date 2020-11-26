@@ -3,7 +3,7 @@ set(CMAKE_SCRIPTS "../cmake")
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/modules;${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS};${CMAKE_SOURCE_DIR};${CMAKE_SOURCE_DIR}/..;${CMAKE_MODULE_PATH}")
 include(prerequisites)
 include(version-def)
-include(add-policies)     # ${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/
+include(add-policies)
 include(detect-systems)
 #include(target-dirs)
 include(utils)

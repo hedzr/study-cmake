@@ -28,12 +28,21 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${ZLIB_LIBRARIES})
 #        )
 target_include_directories(${PROJECT_NAME}
         PUBLIC
-        $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
         PRIVATE
         ${ZLIB_INCLUDE_DIRS}
         )
 
+# for debugging
+file(GENERATE OUTPUT ${CMAKE_GENERATED_DIR}/abc.log CONTENT
+        "-I$<JOIN:$<TARGET_PROPERTY:${PROJECT_NAME},INCLUDE_DIRECTORIES>, -I>"
+        # "$<TARGET_FILE:${PROJECT_NAME}>"
+        # "$<INSTALL_INTERFACE:include> - $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+        )
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E echo
+        ">> INSTALL_INTERFACE \$<INSTALL_INTERFACE:include> = $<INSTALL_INTERFACE:include>")
 
 #
 # Testing
