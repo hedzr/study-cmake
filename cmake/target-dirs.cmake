@@ -32,11 +32,9 @@ if (CMAKE_VERBOSE_DEBUG AND DEBUG)
   # If set, it’s value is also used by the try_compile() command.
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif ()
+set(V alpha beta gamma)
+message(${V})
 
-# FORCE gcc
-#if (MACOS)
-#    set(CMAKE_C_COMPILER "gcc-9")
-#    set(CMAKE_CXX_COMPILER "g++-9")
-#endif()
-#message("CMAKE_C_COMPILER:        ${CMAKE_C_COMPILER}")
-#message("CMAKE_CXX_COMPILER:      ${CMAKE_CXX_COMPILER}")
+foreach(i ${V})
+  message(${i})
+endforeach() 

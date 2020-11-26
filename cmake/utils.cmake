@@ -168,7 +168,7 @@ function(debug_dump_cmake_variables)
         continue()
       endif ()
     endif ()
-    message(STATUS "${_variableName} = ${${_variableName}}")
+    message(STATUS "  - ${_variableName} = ${${_variableName}}")
   endforeach ()
 endfunction()
 
