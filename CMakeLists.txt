@@ -18,7 +18,6 @@ include(cxx-standard-def)
 include(cxx-detect-compilers)
 include(setup-build-env)
 include(versions-gen)
-cxx_set_ipo(${PROJECT_NAME})
 
 debug_print_top_vars()
 # debug_print_value(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
