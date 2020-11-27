@@ -37,19 +37,10 @@ endif ()
 #
 # CPU bits
 #
-if(CMAKE_SYSTEM_PROCESSOR MATCHES "amd64.*|x86_64.*|AMD64.*")
+if (CMAKE_SYSTEM_PROCESSOR MATCHES "amd64.*|x86_64.*|AMD64.*")
   set(CPU_ARCH x64)
-else()
+else ()
   set(CPU_ARCH x86)
-endif()
+endif ()
 mark_as_advanced(CPU_ARCH)
 
-
-#
-# IPO
-#
-include(CheckIPOSupported)
-check_ipo_supported(RESULT result)
-if (result)
-  set_target_properties(foo PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
-endif ()

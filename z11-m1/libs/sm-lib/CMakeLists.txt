@@ -17,6 +17,7 @@ find_package(ZLIB REQUIRED)
 #
 add_library(${PROJECT_NAME})
 add_library(libs::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+cxx_set_ipo(${PROJECT_NAME})
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
 target_sources(${PROJECT_NAME} PRIVATE src/${PROJECT_NAME}.cc)

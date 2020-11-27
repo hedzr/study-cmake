@@ -181,6 +181,21 @@ macro(dump_feature_summary)
 endmacro()
 
 
+function(cxx_set_ipo target)
+  #
+  # IPO
+  #
+  if (POLICY CMP0069)
+    cmake_policy(SET CMP0069 NEW)
+  endif ()
+  include(CheckIPOSupported)
+  check_ipo_supported(RESULT result)
+  if (result)
+    set_target_properties(target PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+  endif ()
+endfunction()
+
+
 macro(add_unit_test target target_dirname target_test)
   # set(UNIT_TEST_TARGETS ${UNIT_TEST_TARGETS} ${target_test} PARENT_SCOPE)
 
