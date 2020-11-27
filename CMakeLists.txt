@@ -41,3 +41,6 @@ add_subdirectory(z11-m1)
 
 # invoke CTest unittests automatically.
 apply_all_unit_tests(all_tests)
+
+#
+dump_feature_summary()

@@ -173,9 +173,17 @@ function(debug_dump_cmake_variables)
 endfunction()
 
 
+macro(dump_feature_summary)
+  if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    feature_summary(WHAT ENABLED_FEATURES DISABLED_FEATURES PACKAGES_FOUND)
+    feature_summary(FILENAME ${CMAKE_CURRENT_BINARY_DIR}/features.log WHAT ALL)
+  endif()
+endmacro()
+
+
 macro(add_unit_test target target_dirname target_test)
   # set(UNIT_TEST_TARGETS ${UNIT_TEST_TARGETS} ${target_test} PARENT_SCOPE)
-  
+
   get_property(tmp GLOBAL PROPERTY UNIT_TEST_TARGETS)
   #set(tmp ${UNIT_TEST_TARGETS} ${CMAKE_CURRENT_BINARY_DIR}/${target_dirname})
   set(tmp ${UNIT_TEST_TARGETS} ${target_test})
