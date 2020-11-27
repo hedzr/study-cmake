@@ -191,7 +191,7 @@ function(cxx_set_ipo target)
   include(CheckIPOSupported)
   check_ipo_supported(RESULT result)
   if (result)
-    set_target_properties(target PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+    set_target_properties(${target} PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
   endif ()
 endfunction()
 
