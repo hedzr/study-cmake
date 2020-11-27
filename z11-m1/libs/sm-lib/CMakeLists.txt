@@ -33,7 +33,9 @@ target_include_directories(${PROJECT_NAME}
         ${ZLIB_INCLUDE_DIRS}
         )
 
+#
 # for debugging
+#
 file(GENERATE OUTPUT ${CMAKE_BINARY_DIR}/generated/abc.log CONTENT
         "-I$<JOIN:$<TARGET_PROPERTY:${PROJECT_NAME},INCLUDE_DIRECTORIES>, -I>"
         # "$<TARGET_FILE:${PROJECT_NAME}>"
@@ -44,16 +46,17 @@ file(GENERATE OUTPUT ${CMAKE_BINARY_DIR}/generated/abc.log CONTENT
 #        ">> INSTALL_INTERFACE \$<INSTALL_INTERFACE:include> = $<INSTALL_INTERFACE:include>")
 
 #
-# Testing
+# for Testing
 #
 
 if (BUILD_TESTING)
     # add_subdirectory(tests)
 #    add_unit_test(${PROJECT_NAME} tests sm_lib_tests)
 endif ()
+debug_print_value(CPU_ARCH)
 
 #
-# Installing
+# for Installing
 #
 
 # Must use GNUInstallDirs to install libraries into correct locations on all platforms.

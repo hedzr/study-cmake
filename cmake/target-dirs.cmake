@@ -1,12 +1,11 @@
 
-
-
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
 set(LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin/lib")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/test)
 
 # Note that CMAKE_GENERATED_DIR is NOT a cmake builtin variable.
 set(CMAKE_GENERATED_DIR "${CMAKE_BINARY_DIR}/generated")
+mark_as_advanced(CMAKE_GENERATED_DIR)
 
 message("   CMAKE_SOURCE_DIR:           ${CMAKE_SOURCE_DIR}")
 message("   CMAKE_BINARY_DIR:           ${CMAKE_BINARY_DIR}")
@@ -33,9 +32,10 @@ if (CMAKE_VERBOSE_DEBUG AND DEBUG)
   # If set, it’s value is also used by the try_compile() command.
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif ()
-set(V alpha beta gamma)
-message(${V})
 
-foreach(i ${V})
-  message(${i})
-endforeach() 
+#set(V alpha beta gamma)
+#message(${V})
+#
+#foreach(i ${V})
+#  message(${i})
+#endforeach()

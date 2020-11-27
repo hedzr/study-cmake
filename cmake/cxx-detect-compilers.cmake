@@ -14,8 +14,42 @@ if (WriterCompilerDetectionHeaderFound)
           PREFIX The
           COMPILERS GNU Clang MSVC Intel AppleClang     #  SunPro
           FEATURES
-            cxx_variadic_templates cxx_final cxx_override
-            cxx_static_assert cxx_constexpr cxx_extern_templates
-            cxx_noexcept cxx_thread_local
+          cxx_variadic_templates cxx_final cxx_override
+          cxx_static_assert cxx_constexpr cxx_extern_templates
+          cxx_noexcept cxx_thread_local
   )
+endif ()
+
+#
+# CMAKE_POSITION_INDEPENDENT_CODE
+#
+include(TestBigEndian)
+if (NOT WIN32)
+  TEST_BIG_ENDIAN(_bigendian)
+  if ((CMAKE_SIZEOF_VOID_P GREATER 4) OR (_bigendian))
+    message(
+            STATUS ">> Setting PIC (${CMAKE_CXX_COMPILE_OPTIONS_PIC}) for machine ${CMAKE_HOST_SYSTEM_PROCESSOR}"
+    )
+    set(CMAKE_POSITION_INDEPENDENT_CODE 1)
+  endif ()
+endif ()
+
+#
+# CPU bits
+#
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "amd64.*|x86_64.*|AMD64.*")
+  set(CPU_ARCH x64)
+else()
+  set(CPU_ARCH x86)
+endif()
+mark_as_advanced(CPU_ARCH)
+
+
+#
+# IPO
+#
+include(CheckIPOSupported)
+check_ipo_supported(RESULT result)
+if (result)
+  set_target_properties(foo PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
 endif ()

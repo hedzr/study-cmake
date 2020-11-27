@@ -32,6 +32,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" OR APPLE)
   SET(DARWIN TRUE)
   SET(MAC TRUE)
   SET(Mac TRUE)
+  mark_as_advanced(MACOSX MACOS macOS DARWIN MAC Mac)
 endif ()
 
 if (UNIX AND NOT MACOS)
@@ -44,6 +45,7 @@ if (UNIX AND NOT MACOS)
   elseif (${CMAKE_SYSTEM_NAME} MATCHES "Minix")
     set(Minix TRUE)
   endif ()
+  mark_as_advanced(LINUX Linux BSD Minix)
 endif ()
 
 if (WIN32)
@@ -53,7 +55,6 @@ endif (WIN32)
 if (MSVC OR MSYS OR MINGW)
   # for detecting Windows compilers
 endif ()
-
 
 if (LINUX)
   message(STATUS ">>> Linux" " FOUND")
