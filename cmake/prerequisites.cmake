@@ -61,7 +61,7 @@ enable_testing()
 #include(GNUInstallDirs)
 
 
-if (CMAKE_VERBOSE_DEBUG AND DEBUG)
+if ((CMAKE_VERBOSE_DEBUG AND DEBUG) OR (ENV{CI_RUNNING}))
   # Enable verbose output from Makefile builds.
   # This variable is a cache entry initialized (to FALSE) by the project() command. 
   # Users may enable the option in their local build tree to get more verbose 

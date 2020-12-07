@@ -7,6 +7,7 @@ env:
   NINJA_VERSION: 1.10.1
   BUILD_TYPE: Release
   CCACHE_VERSION: 3.7.7
+  CI_RUNNING: 1
 
 jobs:
   build:
@@ -98,7 +99,7 @@ jobs:
           path: .ccache
           key: ${{ matrix.config.name }}-ccache-${{ steps.ccache_cache_timestamp.outputs.timestamp }}
           restore-keys: |
-            ${{ matrix.config.name }}-ccache-
+            ${{ matrix.config.name }}-ccache-1-
       - name: Configure
         shell: cmake -P {0}
         run: |
