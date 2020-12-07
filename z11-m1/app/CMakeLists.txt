@@ -6,6 +6,6 @@ project(sm-app
 find_package(sm-lib REQUIRED)
 
 ## Create the executable target
-add_executable(sm-app main.cc)
-target_compile_features(sm-app PRIVATE cxx_std_11)
-target_link_libraries(sm-app PRIVATE sm-lib::sm-lib)
+add_executable(${PROJECT_NAME} main.cc)
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
+target_link_libraries(${PROJECT_NAME} PRIVATE sm-lib::sm-lib)
