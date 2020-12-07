@@ -12,6 +12,10 @@ find_package(ZLIB REQUIRED)
 #    debug_print_value(ZLIB_LIBRARIES)
 #endif ()
 
+if (POLICY CMP0069)
+    cmake_policy(SET CMP0069 NEW)
+endif ()
+
 #
 # A Target:
 #

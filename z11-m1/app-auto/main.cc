@@ -14,6 +14,7 @@
 int main(int argc, char *argv[]) {
     std::string allinput;
 
+    std::cout << "> Waiting for input...." << std::endl;
     while (std::cin.good())     // read all input from cin
     {
         char inbuffer[32768];

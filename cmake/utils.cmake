@@ -181,21 +181,6 @@ macro(dump_feature_summary)
 endmacro()
 
 
-function(cxx_set_ipo target)
-  #
-  # IPO
-  #
-  if (POLICY CMP0069)
-    cmake_policy(SET CMP0069 NEW)
-  endif ()
-  include(CheckIPOSupported)
-  check_ipo_supported(RESULT result)
-  if (result)
-    set_target_properties(${target} PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
-  endif ()
-endfunction()
-
-
 macro(add_unit_test target target_dirname target_test)
   # set(UNIT_TEST_TARGETS ${UNIT_TEST_TARGETS} ${target_test} PARENT_SCOPE)
 
@@ -228,12 +213,20 @@ macro(apply_all_unit_tests tests_name)
           )
 endmacro()
 
-function(with_ipo_supports)
+
+function(cxx_set_ipo target)
+  #
+  # IPO
+  #
   # Interprocedural optimization
   # https://cliutils.gitlab.io/modern-cmake/chapters/features/small.html
+  if (POLICY CMP0069)
+    cmake_policy(SET CMP0069 NEW)
+  endif ()
   include(CheckIPOSupported) # need decl at first: cmake_minimum_required(VERSION 3.9..3.13)
   check_ipo_supported(RESULT result)
   if (result)
+    # set_target_properties(${target} PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
     if (ARGV0)
       set_target_properties("${ARGV0}" PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
       message(" -- IPO support enabled for: ${ARGV0}")
@@ -823,11 +816,26 @@ endfunction()
 #   ENDFOREACH()
 
 function(subdir_list result curdir)
-  message("curdir = ${curdir}")
+  # message("curdir = ${curdir}")
   file(GLOB children RELATIVE ${curdir} ${curdir}/*)
   set(dirlist "")
   foreach (child ${children})
     if (IS_DIRECTORY ${curdir}/${child})
+      list(APPEND dirlist ${child})
+    endif ()
+  endforeach ()
+  set(${result} ${dirlist} PARENT_SCOPE)
+endfunction()
+
+# cmake_subdir_list lists all subdirectories which contains CMakeLists.txt
+function(cmake_subdir_list result curdir)
+  # message("curdir = ${curdir}")
+  file(GLOB children
+          LIST_DIRECTORIES true
+          RELATIVE ${curdir} ${curdir}/*)
+  set(dirlist "")
+  foreach (child ${children})
+    if (EXISTS ${curdir}/${child}/CMakeLists.txt)
       list(APPEND dirlist ${child})
     endif ()
   endforeach ()
