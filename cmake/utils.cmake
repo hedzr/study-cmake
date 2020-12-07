@@ -174,10 +174,10 @@ endfunction()
 
 
 macro(dump_feature_summary)
-  if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+  if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     feature_summary(WHAT ENABLED_FEATURES DISABLED_FEATURES PACKAGES_FOUND)
     feature_summary(FILENAME ${CMAKE_CURRENT_BINARY_DIR}/features.log WHAT ALL)
-  endif()
+  endif ()
 endmacro()
 
 

@@ -2,13 +2,16 @@
 // Created by Hedzr Yeh on 2020/11/19.
 //
 
-#include <string>
 #include <sstream>
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
-#include <string.h>
+#include <cstring>
+//#include <string.h>
+//#include <string>
+
 #include "sm-lib/sm-lib.hh"
+
 
 // from https://panthema.net/2007/0328-ZLibString.html
 int main(int argc, char *argv[]) {

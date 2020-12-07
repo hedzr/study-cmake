@@ -4,12 +4,12 @@
 
 
 if (DEFINED ARCHIVE_NAME)
-else()
+else ()
   set(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${PROJECT_VERSION})
-endif()
+endif ()
 
 if (DEFINED xVERSION_IN)
-else()
+else ()
   set(xVERSION_IN ${CMAKE_SOURCE_DIR}/${CMAKE_SCRIPTS}/version.h.in)
 endif ()
 message("Using version.in file: ${xVERSION_IN}, ARCHIVE_NAME = ${ARCHIVE_NAME}")

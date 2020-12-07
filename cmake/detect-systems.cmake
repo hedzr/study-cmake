@@ -69,7 +69,9 @@ elseif (WIN32)
 else ()
   message(STATUS ">>> Unknown" " FOUND")
 endif ()
-
+if (MINGW)
+  message(STATUS ">>> MinGW" " FOUND")
+endif ()
 
 #
 #
