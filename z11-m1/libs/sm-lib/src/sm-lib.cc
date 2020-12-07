@@ -4,7 +4,7 @@
 
 #include "sm-lib/sm-lib.hh"
 
-#include <string>
+//#include <string>
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
@@ -12,7 +12,7 @@
 #include <memory>
 #include <cstring>
 
-#include <zlib.h>
+//#include <zlib.h>
 
 std::string compress_string(const std::string &str, int compression_level) {
     z_stream zs;                        // z_stream is zlib's control structure
