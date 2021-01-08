@@ -13,3 +13,5 @@ target_link_libraries(${PROJECT_NAME}
 if (BUILD_TESTING)
     add_unit_test(${PROJECT_NAME} tests sm_lib_app_tests)
 endif ()
+
+debug_dump_target_inc_dirs(${PROJECT_NAME})
