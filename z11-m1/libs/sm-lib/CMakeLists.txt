@@ -22,6 +22,7 @@ endif ()
 add_library(${PROJECT_NAME})
 add_library(libs::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 cxx_set_ipo(${PROJECT_NAME})
+set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "libs/${PROJECT_NAME}")
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
 target_sources(${PROJECT_NAME} PRIVATE src/${PROJECT_NAME}.cc)
@@ -111,3 +112,5 @@ install(FILES
         ${CMAKE_CURRENT_LIST_DIR}/cmake/${PROJECT_NAME}Config.cmake
         DESTINATION
         ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+
+debug_dump_target_inc_dirs(${PROJECT_NAME})
