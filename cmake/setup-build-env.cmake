@@ -19,6 +19,11 @@
 if (MSVC)
   # warning level 4 and all warnings as errors
   add_compile_options(/W4 /WX)
+  if (DEBUG)
+    add_compile_options(-D_DEBUG)
+  else()
+    add_compile_options(-DNDEBUG)
+  endif ()
 else ()
   # lots of warnings and all warnings as errors
   add_compile_options(-Wall -Wextra -pedantic -Werror)
@@ -27,6 +32,11 @@ endif ()
 if (MinGW)
   # try solving multiple definition error for MinGW
   add_compile_options(-D__USE_MINGW_ANSI_STDIO=0)
+  if (DEBUG)
+    add_compile_options(-D_DEBUG)
+  else()
+    add_compile_options(-DNDEBUG)
+  endif ()
   add_link_options(--allow-multiple-definition)
 endif ()
 
