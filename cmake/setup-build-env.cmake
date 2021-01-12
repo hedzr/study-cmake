@@ -24,7 +24,9 @@ else ()
   add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif ()
 
-if (DEBUG AND MINGW)
+if (MinGW)
+  # try solving multiple definition error for MinGW
+  add_compile_options(-D__USE_MINGW_ANSI_STDIO=0)
   add_link_options(--allow-multiple-definition)
 endif ()
 
