@@ -203,7 +203,7 @@ jobs:
 
 
       - name: Upload
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           path: ./${{ matrix.config.artifact }}
           name: ${{ matrix.config.artifact }}
@@ -258,16 +258,19 @@ jobs:
             os: ubuntu-latest
           }
     needs: release
+    permissions:
+      contents: write
+      discussions: write
 
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v4.1.7
+        uses: actions/download-artifact@v4
         with:
           name: ${{ matrix.config.artifact }}
           path: ./
 
       - name: Download URL
-        uses: actions/download-artifact@v4.1.7
+        uses: actions/download-artifact@v4
         with:
           name: upload_url
           path: ./
@@ -277,11 +280,17 @@ jobs:
           echo ::set-output name=upload_url::$upload_url
       - name: Upload to Release
         id: upload_to_release
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # uses: actions/upload-release-asset@v1.0.1
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        # env:
+        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.set_upload_url.outputs.upload_url }}
-          asset_path: ./${{ matrix.config.artifact }}
-          asset_name: ${{ matrix.config.artifact }}
-          asset_content_type: application/x-gtar
+          # token: ...
+          generate_release_notes: true
+          files: |
+            ./${{ matrix.config.artifact }}
+          # upload_url: ${{ steps.set_upload_url.outputs.upload_url }}
+          # asset_path: ./${{ matrix.config.artifact }}
+          # asset_name: ${{ matrix.config.artifact }}
+          # asset_content_type: application/x-gtar
